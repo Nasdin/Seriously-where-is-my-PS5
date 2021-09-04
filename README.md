@@ -26,6 +26,13 @@ For your machine/container/rc
     TWILIO_WHATSAPP_FROM = os.environ.get("TWILIO_FROM")
     TWILIO_WHATSAPP_TO = os.environ.get("TWILIO_TO")`
 
+### Sending to multiple whatsapp numbers
+TWILIO_TO accepts a comma separated list
+   
+   example: of 2 numbers
+
+   `os.environ['TWILIO_TO] = "123456,1234123"`
+
 ## If you're using Twilio Sandbox
 1. This is a free feature from Twilio to get free whatsapp messaging
 2. Users need to rejoin their sandbox channels
