@@ -2,14 +2,16 @@
 Where is my PS5?! Is a Cron bot that searches and scans Singapore Challenger's Hachi Tech for any Stock of PS5(Or any other search item of your liking). It can print and send whenever it has found a stock to the user, attached with link to the purchase. Pages are scanned every 1 second
 
 ## Let me know when there's a PS5 via Whatsapp
+Example is given for ps4 ( You can also change the search field)
 ![](public/img.png)
 ### Specifications of alerts
 1. List of products found in that page that matches the `search_word`
 2. For each product:
    1. Description
    2. Link
-   3. Search Page
-   4. Image
+   3. Price(s)
+   4. Search Page
+   5. Image
 
 
 ### Bot Intervals

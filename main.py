@@ -182,8 +182,8 @@ def intro_message(found_items):
 
     else:
         message = f"""Congratulations, we found your item!
-    Your {SEARCH_ITEM} is available in {HACHI_SEARCH_PAGE_LINK}
-    here are the links: """
+Your {SEARCH_ITEM} is available in {HACHI_SEARCH_PAGE_LINK}
+here are the links: """
     return message
 
 
@@ -192,12 +192,12 @@ def build_message_items(found_items):
 
     for i, item in enumerate(found_items):
         message = f"""
-    Item No: {i + 1}
-    Description: {item['item_description']}
-    Price: ${item['price']} (Members: ${item['member_price']})
-    Link: {item['link']}
-    Searched from: {HACHI_SEARCH_PAGE_LINK}
-    Image: {item['item_image']}
+Item No: {i + 1}
+Description: {item['item_description']}
+Price: ${item['price']} (Members: ${item['member_price']})
+Link: {item['link']}
+Searched from: {HACHI_SEARCH_PAGE_LINK}
+Image: {item['item_image']}
 
         """
         message_items.append(message)
@@ -224,7 +224,7 @@ def main():
     message_pack.extend(message_items)
     body = "\n".join(message_pack)
     if found:
-        body += "\n Will alert you again in 1 hour if its still there"
+        body += "\n Will alert you again in *1 hour* if its still there"
 
         if ENABLED_TWILIO:
 
