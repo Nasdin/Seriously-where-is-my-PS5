@@ -74,13 +74,16 @@ We assume you have Python installed
 2. Run the project by:
 
 
-    python main.py
+      python main.py
+
+3. No other dependencies/requirements.txt required.
+4. This was designed with pure Python in mind without bs4/scrapy so that I can run it in my crap-machine 24/7
 
 
 
 ## Project setup suggestions
-1. You can have the project running constantly 24/7 in your own laptop as you work,
-2. Or you may setup a container yourself in GCP/AWS/Azure that constantly runs the functions
+1. You can have the python script running constantly 24/7 in your own laptop as you work,
+2. Or you may setup a container yourself in GCP/AWS/Azure that constantly runs this in terminal
 
 
 # Preview
