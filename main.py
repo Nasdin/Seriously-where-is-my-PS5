@@ -10,7 +10,7 @@ import datetime
 HACHI_SEARCH_PAGE_LINK = (
     "https://www.hachi.tech/game-on/gaming-consoles-accessories/playstation-consoles"
 )
-SEARCH_ITEM = "PS4"
+SEARCH_ITEM = "PS5"
 
 HACHI_JS_LINK = "https://www.hachi.tech/js/app.js"
 HACHI_PRODUCT_LINK = "https://www.hachi.tech/sony/sony/obffr/"
