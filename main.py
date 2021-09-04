@@ -1,10 +1,11 @@
-import requests
-from ast import literal_eval
+import datetime
 import json
-import urllib
 import os
 import time
-import datetime
+import urllib
+from ast import literal_eval
+
+import requests
 
 # Product Search Settings
 HACHI_SEARCH_PAGE_LINK = (
@@ -16,31 +17,36 @@ HACHI_JS_LINK = "https://www.hachi.tech/js/app.js"
 HACHI_PRODUCT_LINK = "https://www.hachi.tech/sony/sony/obffr/"
 SEARCH_QUERY = "https://{ALGOLIA_APPLICATION_ID}-dsn.algolia.net/1/indexes/*/queries"
 
-twilio_account_sid = os.environ["TWILIO_ACCOUNT_SID"]
-twilio_auth_token = os.environ["TWILIO_AUTH_TOKEN"]
-twillio_whatsapp_from = os.environ["TWILLIO_FROM"]
-twillio_whatsapp_to = os.environ["TWILLIO_TO"]
+TWILIO_ACCOUNT_SID = os.environ["TWILIO_ACCOUNT_SID"]
+TWILIO_AUTH_TOKEN = os.environ["TWILIO_AUTH_TOKEN"]
+TWILIO_WHATSAPP_FROM = os.environ["TWILLIO_FROM"]
+TWILIO_WHATSAPP_TO = os.environ["TWILLIO_TO"]
 
 # Sandbox settings
 sandbox_expiry = datetime.datetime.now() + datetime.timedelta(hours=70)
 sandbox_rejoin_message = "join turquoise-dolphin"
 
+SEARCH_QUERY_SEARCH_PARAMS = """filters=active_sites%3AHSG&maxValuesPerFacet=99&query=&hitsPerPage=48&highlightPreTag=__
+ais-highlight__&highlightPostTag=__%2Fais-highlight__&page=0&facets=%5B%22regular_price%22%2C%22brand_id%22%2C%22
+boutiquecates.boutique%22%2C%22boutiquecates.category%22%2C%22boutiquecates.subcategory%22%5D&tagFilters=&facet
+Filters=%5B%5B%22boutiquecates.subcategory%3A{search_criteria}%22%5D%5D"""
+
 ENABLED_TWILIO = (
-    twilio_account_sid
-    and twilio_auth_token
-    and twillio_whatsapp_from
-    and twillio_whatsapp_to
+    TWILIO_ACCOUNT_SID
+    and TWILIO_AUTH_TOKEN
+    and TWILIO_WHATSAPP_FROM
+    and TWILIO_WHATSAPP_TO
 )
 found = False
 
 if ENABLED_TWILIO:
     from twilio.rest import Client
 
-    twillio_whatsapp_to = twillio_whatsapp_to.split(",")
+    TWILIO_WHATSAPP_TO = TWILIO_WHATSAPP_TO.split(",")
 
     # Find your Account SID and Auth Token at twilio.com/console
     # and set the environment variables. See http://twil.io/secure
-    client = Client(twilio_account_sid, twilio_auth_token)
+    client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 
 def main():
@@ -60,9 +66,8 @@ def main():
         link_candidate = link_content[js_location:js_location_end]
         if link_candidate.endswith('"'):
             not_found = False
+            js_link_with_id = link_candidate[:-1]
         js_location_end += 1
-
-    js_link_with_id = link_candidate[:-1]
 
     # Get algoliaSite keys from js content
 
@@ -83,10 +88,10 @@ def main():
 
     # Hack the Algolia API KEY and application id
 
-    ALGOLIA_APPLICATION_ID, ALGOLIA_API_KEY = literal_eval(candidate)
+    algolia_application_id, algolia_api_key = literal_eval(candidate)
 
     search_query = SEARCH_QUERY.format(
-        ALGOLIA_APPLICATION_ID=ALGOLIA_APPLICATION_ID.lower()
+        ALGOLIA_APPLICATION_ID=algolia_application_id.lower()
     )
 
     # Derive Search Criteria
@@ -111,7 +116,6 @@ def main():
 
     # % Search for the product
 
-    SEARCH_QUERY_SEARCH_PARAMS = "filters=active_sites%3AHSG&maxValuesPerFacet=99&query=&hitsPerPage=48&highlightPreTag=__ais-highlight__&highlightPostTag=__%2Fais-highlight__&page=0&facets=%5B%22regular_price%22%2C%22brand_id%22%2C%22boutiquecates.boutique%22%2C%22boutiquecates.category%22%2C%22boutiquecates.subcategory%22%5D&tagFilters=&facetFilters=%5B%5B%22boutiquecates.subcategory%3A{search_criteria}%22%5D%5D"
     search_query_search_params = SEARCH_QUERY_SEARCH_PARAMS.format(
         search_criteria=urllib.parse.quote(search_criteria)
     )
@@ -119,9 +123,10 @@ def main():
     search_results = requests.post(
         search_query,
         params={
-            "x-algolia-agent": "Algolia for JavaScript (4.10.5); Browser (lite); instantsearch.js (4.29.0); Vue (2.6.14); Vue InstantSearch (3.8.1); JS Helper (3.5.5)",
-            "x-algolia-api-key": ALGOLIA_API_KEY,
-            "x-algolia-application-id": ALGOLIA_APPLICATION_ID,
+            "x-algolia-agent": "Algolia for JavaScript (4.10.5); Browser (lite); instantsearch.js (4.29.0); Vue"
+            " (2.6.14); Vue InstantSearch (3.8.1); JS Helper (3.5.5)",
+            "x-algolia-api-key": algolia_api_key,
+            "x-algolia-application-id": algolia_application_id,
         },
         json={
             "requests": [
@@ -191,9 +196,9 @@ Image: {item['item_image']}
         message_pack.append("Will alert you again in 1 hour if its still there")
         print("Sending Whatsapp messages")
 
-        for to in twillio_whatsapp_to:
+        for to in TWILIO_WHATSAPP_TO:
             twilio_message = client.messages.create(
-                from_=f"whatsapp:{twillio_whatsapp_from}",
+                from_=f"whatsapp:{TWILIO_WHATSAPP_FROM}",
                 body="\n".join(message_pack),
                 to=f"whatsapp:{to}",
             )
@@ -205,13 +210,13 @@ def remind_renew_sandbox():
     global sandbox_expiry
     if time_now >= sandbox_expiry:
 
-        for to in twillio_whatsapp_to:
+        for to in TWILIO_WHATSAPP_TO:
             twilio_message = client.messages.create(
-                from_=f"whatsapp:{twillio_whatsapp_from}",
+                from_=f"whatsapp:{TWILIO_WHATSAPP_FROM}",
                 body=f"Reminder to rejoin sandbox via replying to this message with {sandbox_rejoin_message}",
                 to=f"whatsapp:{to}",
             )
-        # Remind in another 72 hours, But user not receive anymore reminders nor messages if they did not renew their lease
+        # Remind in another 72 hours, But user not receive anymore reminders nor messages if they did not renew
         sandbox_expiry = datetime.datetime.now() + datetime.timedelta(hours=72)
 
 
