@@ -76,8 +76,7 @@ We assume you have Python installed
 In your terminal: 
       `python main.py`
 
-3. No other dependencies/requirements.txt required.
-   1. But if you are using the whatsapp feature:
+3. Install dependencies
 
 In your terminal: 
    `pip install -r requirements.txt`
