@@ -1,5 +1,5 @@
 # Seriously-where-is-my-PS5
-Where is my PS5?! Is a Cron bot that searches and scans Singapore Challenger's Hachi Tech for any Stock of PS5(Or any other search item of your liking). It can print and send whenever it has found a stock to the user, attached with link to the purchase. Pages are scanned every 1 second
+Where is my PS5?! Is a cron-whatsapp bot that searches and scans Singapore Challenger's Hachi Tech for any Stock of PS5(Or any other search item of your liking). It can print and send whenever it has found a stock to the user, attached with link to the purchase. Pages are scanned every 1 second
 
 ## Let me know when there's a PS5 via Whatsapp
 Example is given for ps4 ( You can also change the search field)
@@ -73,12 +73,13 @@ We assume you have Python installed
 1. Git clone the project
 2. Run the project by:
 
-
-      python main.py
+In your terminal: 
+      `python main.py`
 
 3. No other dependencies/requirements.txt required.
    1. But if you are using the whatsapp feature:
 
+In your terminal: 
    `pip install -r requirements.txt`
 
 4. This was designed with pure Python in mind without bs4/scrapy so that I can run it in my crap-machine 24/7
