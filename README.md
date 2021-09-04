@@ -77,6 +77,10 @@ We assume you have Python installed
       python main.py
 
 3. No other dependencies/requirements.txt required.
+   1. But if you are using the whatsapp feature:
+
+   `pip install -r requirements.txt`
+
 4. This was designed with pure Python in mind without bs4/scrapy so that I can run it in my crap-machine 24/7
 
 
