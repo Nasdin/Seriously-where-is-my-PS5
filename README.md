@@ -46,29 +46,25 @@ You can setup the reminder message here:
 
 
 # Parameters
-Edit the main.py script, it was designed to have everything in a single file/function
+## Search parameters
+They can be either modified in script main.py
+Or modified via environment variables
 
-So that we can put this into a lightweight cronjob/container.
+### Search terms
 
-I have a miniPC that pulls/downloads just the file and runs it.
+`SEARCH_ITEM` - Case insensitive match if a product description contains this term.
 
-### Modifying the project to search other products:
-Change these values in main.py
+Can be changed using the environment variable `SEARCH_ITEM`
 
-What to search for:
+`HACHI_SEARCH_PAGE_LINK` - A category page in Hachi Tech, can be nested or unnested.
+This is the page where our product may appear in.
+The higher the level, the more irrelevant results.
 
-    SEARCH_ITEM = "PS5"
+Can be changed using the environment variable `SEARCH_PAGE_LINK`
 
-Where to search it from:
+# Setting up the Project
 
-    HACHI_SEARCH_PAGE_LINK = (
-        "https://www.hachi.tech/game-on/gaming-consoles-accessories/playstation-consoles"
-    )
-
-
-# Setting up the project
-
-We assume you have Python installed
+We assume you have Python 3 installed
 
 1. Git clone the project
 2. Run the project by:
