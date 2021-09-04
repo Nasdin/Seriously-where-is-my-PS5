@@ -96,3 +96,26 @@ I set it to search for Ps4 in this Image
 Console Logs while its searching
 
 ![](public/img_1.png)
+
+
+## Comments
+
+#### "Why your code is so ugly and has no test"
+
+I wrote it in 3 hours on a Saturday morning, I have a full time job and family and I just need something to get the job done.
+
+It was intended that everything fits into a single main.py function because I have a crap 1ghz machine that pulls this script along other cron scripts to do my bidding.
+This runs 24/7
+
+
+#### "Can it support X/Y/Z"
+
+Listen, open source is where I put out my own creations for my own use, but I just happen to share it to the public out of my own free time and kindness.
+
+You are free to make a request, but I have no obligation to work for you, unless you are my paymaster.
+
+If your requests looks like something that will benefit >me< as well, then I will give it a shot and add it in.
+
+PRs are welcome.
+
+
