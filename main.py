@@ -8,10 +8,11 @@ from ast import literal_eval
 import requests
 
 # Product Search Settings
-HACHI_SEARCH_PAGE_LINK = (
-    "https://www.hachi.tech/game-on/gaming-consoles-accessories/playstation-consoles"
+HACHI_SEARCH_PAGE_LINK = os.environ.get(
+    "SEARCH_PAGE_LINK",
+    "https://www.hachi.tech/game-on/gaming-consoles-accessories/playstation-consoles",
 )
-SEARCH_ITEM = "PS4"
+SEARCH_ITEM = os.environ.get("SEARCH_ITEM", "PS5")
 
 HACHI_JS_LINK = "https://www.hachi.tech/js/app.js"
 HACHI_PRODUCT_LINK = "https://www.hachi.tech/sony/sony/obffr/"
