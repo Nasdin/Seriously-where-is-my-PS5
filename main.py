@@ -17,25 +17,26 @@ HACHI_JS_LINK = "https://www.hachi.tech/js/app.js"
 HACHI_PRODUCT_LINK = "https://www.hachi.tech/sony/sony/obffr/"
 SEARCH_QUERY = "https://{ALGOLIA_APPLICATION_ID}-dsn.algolia.net/1/indexes/*/queries"
 
-TWILIO_ACCOUNT_SID = os.environ["TWILIO_ACCOUNT_SID"]
-TWILIO_AUTH_TOKEN = os.environ["TWILIO_AUTH_TOKEN"]
-TWILIO_WHATSAPP_FROM = os.environ["TWILLIO_FROM"]
-TWILIO_WHATSAPP_TO = os.environ["TWILLIO_TO"]
+TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
+TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
+TWILIO_WHATSAPP_FROM = os.environ.get("TWILIO_FROM")
+TWILIO_WHATSAPP_TO = os.environ.get("TWILIO_TO")
 
 # Sandbox settings
 sandbox_expiry = datetime.datetime.now() + datetime.timedelta(hours=70)
 sandbox_rejoin_message = "join turquoise-dolphin"
 
-SEARCH_QUERY_SEARCH_PARAMS = """filters=active_sites%3AHSG&maxValuesPerFacet=99&query=&hitsPerPage=48&highlightPreTag=__
-ais-highlight__&highlightPostTag=__%2Fais-highlight__&page=0&facets=%5B%22regular_price%22%2C%22brand_id%22%2C%22
-boutiquecates.boutique%22%2C%22boutiquecates.category%22%2C%22boutiquecates.subcategory%22%5D&tagFilters=&facet
-Filters=%5B%5B%22boutiquecates.subcategory%3A{search_criteria}%22%5D%5D"""
+SEARCH_QUERY_SEARCH_PARAMS = "filters=active_sites%3AHSG&maxValuesPerFacet=99&query=&hitsPerPage=48&highlightPreTag=" \
+                             "__ais-highlight__&highlightPostTag=__%2Fais-highlight__&page=0&facets=%5B%22regular" \
+                             "_price%22%2C%22brand_id%22%2C%22boutiquecates.boutique%22%2C%22boutiquecates.category" \
+                             "%22%2C%22boutiquecates.subcategory%22%5D&tagFilters=&facetFilters=%5B%5B%22boutiquecates" \
+                             ".subcategory%3A{search_criteria}%22%5D%5D"""
 
 ENABLED_TWILIO = (
-    TWILIO_ACCOUNT_SID
-    and TWILIO_AUTH_TOKEN
-    and TWILIO_WHATSAPP_FROM
-    and TWILIO_WHATSAPP_TO
+        TWILIO_ACCOUNT_SID
+        and TWILIO_AUTH_TOKEN
+        and TWILIO_WHATSAPP_FROM
+        and TWILIO_WHATSAPP_TO
 )
 found = False
 
@@ -124,7 +125,7 @@ def main():
         search_query,
         params={
             "x-algolia-agent": "Algolia for JavaScript (4.10.5); Browser (lite); instantsearch.js (4.29.0); Vue"
-            " (2.6.14); Vue InstantSearch (3.8.1); JS Helper (3.5.5)",
+                               " (2.6.14); Vue InstantSearch (3.8.1); JS Helper (3.5.5)",
             "x-algolia-api-key": algolia_api_key,
             "x-algolia-application-id": algolia_application_id,
         },
